@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+	id "org.sonarqube" version "3.0"
+	id 'com.palantir.docker' version '0.31.0'
+}
+
+version = "latest"
+sourceCompatibility = '8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'mysql:mysql-connector-java'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+	compileOnly 'org.projectlombok:lombok:1.18.20'
+	annotationProcessor 'org.projectlombok:lombok:1.18.20'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+String dockerUserName = findProperty('dockerHubUsername') ?: 'morozovd'
+String containerName = "${dockerUserName}/shop:$version"
+
+docker {
+	name containerName
+	files "build/libs/${bootWar.archiveFileName.get()}"
+	buildArgs([WAR_FILE: bootWar.archiveFileName.get()])
+}
