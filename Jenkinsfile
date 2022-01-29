@@ -5,7 +5,7 @@ pipeline {
     environment {
         SONAR = "true"
         DOCKER_HOST = "tcp://host.docker.internal:2375"
-        DOCKER_HUB_LOGIN = credentials('docker-hub')
+        DOCKER_HUB_LOGIN = credentials('github')
     }
 
     stages {
