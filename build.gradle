@@ -34,6 +34,6 @@ String containerName = "${dockerUserName}/shop:$version"
 
 docker {
 	name containerName
-	files "build/libs/${bootWar.archiveFileName.get()}"
+	files "/build/libs/${bootWar.archiveFileName.get()}"
 	buildArgs([WAR_FILE: bootWar.archiveFileName.get()])
 }
