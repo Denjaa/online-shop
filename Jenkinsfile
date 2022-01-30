@@ -15,7 +15,7 @@ pipeline {
                 deleteDir()
 
                 // fetching the latest source and and application code from repository
-                git branch: 'main', url: 'https://github.com/Denjaa/athlone-institute-technology.git'
+                git branch: 'main', url: 'https://github.com/Denjaa/online-shop.git'
 
                 // setting up the running mode on the application of Gradle and all required permissions (executable)
                 sh ('chmod +x gradlew')
@@ -45,13 +45,13 @@ pipeline {
             }
         }
 
-//         stage('Test') {
-//             steps {
-//                 // running the tests that are written for the microservice to make sure everything passes
-//                 // if tests fail then this stage will fail
-//                 sh ('./gradlew test')
-//             }
-//         }
+        stage('Test') {
+            steps {
+                // running the tests that are written for the microservice to make sure everything passes
+                // if tests fail then this stage will fail
+                sh ('./gradlew test')
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
