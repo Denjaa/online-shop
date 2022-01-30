@@ -29,6 +29,9 @@ test {
 	useJUnitPlatform()
 }
 
+war {
+	enabled=true
+}
 String dockerUserName = findProperty('dockerHubUsername') ?: 'morozovd'
 String containerName = "${dockerUserName}/shop:$version"
 
