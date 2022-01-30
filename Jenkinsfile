@@ -65,7 +65,7 @@ pipeline {
                 // logging into the system and running the pushing artifact into artifactory
                 sh ('''
                     docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW
-                    docker push morozovd/continious-integration-and-development-assessment
+                    docker push morozovd/shop:latest
                 ''')
             }
         }
