@@ -56,7 +56,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // building docker image based on the Dockerfile commands
-                sh ('./gradlew build docker')
+                sh ('./gradlew -x build docker')
             }
         }
 
