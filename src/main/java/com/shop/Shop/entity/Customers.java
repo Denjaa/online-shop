@@ -7,12 +7,14 @@ import javax.persistence.*;
 public class Customers {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="customer_id")
-    private int customer_id;
+    @Column(name="id")
+    private int id;
 
     @Column(name="name")
     private String name;
+
+    @Column(name="surname")
+    private String surname;
 
     @Column(name="address")
     private String address;
@@ -20,28 +22,36 @@ public class Customers {
     @Column(name="email")
     private String email;
 
-    @Column(name="age")
-    private int age;
+    @Column(name="productId")
+    private int productId;
 
     public Customers() {
         super();
     }
 
-    public Customers(int customer_id, String name, String address, String email, int age) {
-        super();
-        this.customer_id = customer_id;
+    public Customers(int id, String name, String surname, String address, String email, int productId) {
+        this.id = id;
         this.name = name;
+        this.surname = surname;
         this.address = address;
         this.email = email;
-        this.age = age;
+        this.productId = productId;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getId() {
+        return id;
     }
 
-    public void setCustomer_id(int customer_id) {
-        this.customer_id = customer_id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getAddress() {
@@ -68,11 +78,11 @@ public class Customers {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 }

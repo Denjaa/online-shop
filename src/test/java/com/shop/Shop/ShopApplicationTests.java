@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -20,13 +21,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class ShopApplicationTests {
 
+	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0MzY2OTk5MCwiaWF0IjoxNjQzNjMzOTkwfQ.X7z4NEgWHhLfCxQ9Nc9rm8v2dyKmGlkKA6OgZ87vaC8";
+
 	@Autowired
 	private MockMvc mockMvc;
 
 	@Test
 	public void allCustomers() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/customers/allCustomers")
-						.accept(MediaType.APPLICATION_JSON))
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
 				.andExpect(status().isOk())
 				.andReturn();
 	}
@@ -34,18 +37,18 @@ class ShopApplicationTests {
 	@Test
 	public void getCustomer() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/customers/getById/1")
-						.accept(MediaType.APPLICATION_JSON))
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
 				.andExpect(status().isOk())
 				.andReturn();
 	}
 
 	@Test
 	public void addOrUpdateCustomer() throws Exception {
-		String customer = "{\"customer_id\":4,\"name\":\"Tester\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"age\":102}";
+		String customer = "{\"id\":3,\"name\":\"Tester\",\"surname\":\"Tester Surname\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"product_id\":100}";
 		mockMvc.perform(MockMvcRequestBuilders.post("/customers/addOrUpdate")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(customer)
-						.accept(MediaType.APPLICATION_JSON))
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
 				.andExpect(status().isOk())
 				.andReturn();
 	}
@@ -53,10 +56,46 @@ class ShopApplicationTests {
 	@Test
 	public void deleteCustomer() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.delete("/customers/delete/5")
-						.accept(MediaType.APPLICATION_JSON))
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
+						.andExpect(status().isOk())
+						.andReturn();
+	}
+
+	@Test
+	public void allProducts() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/products/allProducts")
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
 				.andExpect(status().isOk())
 				.andReturn();
 	}
+
+	@Test
+	public void getProduct() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.get("/products/getById/1")
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
+				.andExpect(status().isOk())
+				.andReturn();
+	}
+
+	@Test
+	public void addOrUpdateProduct() throws Exception {
+		String customer = "{\"id\":3,\"name\":\"Tester\",\"brand\":\"Tester Surname\",\"availability\":\"Testing\"}";
+		mockMvc.perform(MockMvcRequestBuilders.post("/products/addOrUpdate")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(customer)
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
+				.andExpect(status().isOk())
+				.andReturn();
+	}
+
+	@Test
+	public void deleteProduct() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.delete("/products/delete/3")
+						.accept(MediaType.APPLICATION_JSON).header(HttpHeaders.AUTHORIZATION, generated_tokenizer))
+				.andExpect(status().isOk())
+				.andReturn();
+	}
+
 
 
 
