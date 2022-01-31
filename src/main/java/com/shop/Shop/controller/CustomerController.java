@@ -1,22 +1,11 @@
 package com.shop.Shop.controller;
 
 import com.shop.Shop.entity.Customers;
-import com.shop.Shop.models.AuthenticationRequest;
-import com.shop.Shop.models.AuthenticationResponse;
 import com.shop.Shop.service.CustomerService;
-import com.shop.Shop.service.MyUserDetailsService;
-import com.shop.Shop.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
