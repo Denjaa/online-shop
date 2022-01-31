@@ -13,12 +13,4 @@ public class ShopApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
 	}
-
-	@Bean
-	public CommandLineRunner sampleData(CustomerRepository repository) {
-		return (args) -> {
-			repository.save(new Customers(1, "denis", "King Street", "morozov@hot.ee", 21));
-		};
-	}
-
 }

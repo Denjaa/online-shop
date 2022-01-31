@@ -4,7 +4,6 @@ import com.shop.Shop.entity.Customers;
 import com.shop.Shop.repository.CustomerRepository;
 import com.shop.Shop.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
