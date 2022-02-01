@@ -49,6 +49,7 @@ docker {
 	buildArgs([WAR_FILE: bootWar.archiveFileName.get()])
 }
 
+
 dockerRun {
 	name project.name
 	image containerName
