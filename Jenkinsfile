@@ -69,5 +69,13 @@ pipeline {
                 ''')
             }
         }
+
+        stage('Deploy Docker Image') {
+                    steps {
+                        // deploying docker image
+                        sh ('./gradlew build dockerRun')
+                    }
+                }
+
     }
 }

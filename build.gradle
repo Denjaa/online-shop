@@ -5,9 +5,10 @@ plugins {
 	id 'war'
 	id "org.sonarqube" version "3.0"
 	id 'com.palantir.docker' version '0.31.0'
+	id 'com.palantir.docker-run' version '0.31.0'
 }
 
-version = "latest"
+version = "1.0"
 sourceCompatibility = '8'
 
 repositories {
@@ -46,4 +47,11 @@ docker {
 	name containerName
 	files "build/libs/${bootWar.archiveFileName.get()}"
 	buildArgs([WAR_FILE: bootWar.archiveFileName.get()])
+}
+
+dockerRun {
+	name project.name
+	image containerName
+	ports '8080:8080'
+	clean true
 }

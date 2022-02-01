@@ -23,8 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class ShopApplicationTests {
 
-	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0MzY4OTk0NiwiaWF0IjoxNjQzNjUzOTQ2fQ.mKMIXEK-qR5rdho4ECZrvhAESlvhT3D-7AXHxDXePyA";
-
+	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0Mzc0MTc3NiwiaWF0IjoxNjQzNzA1Nzc2fQ.Iii2pPkXtCH-KnT29EyldL7ZYE4rrYH_Fqfbfcu_1lY";
 	@Autowired
 	private MockMvc mockMvc;
 
