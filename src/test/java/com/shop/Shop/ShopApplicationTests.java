@@ -25,8 +25,6 @@ class ShopApplicationTests {
 
 	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0Mzg2MzUxNCwiaWF0IjoxNjQzODI3NTE0fQ.-pvMB800hJY1EdNt3soHE9F6eyWW-aDDppwfnU3pS5Y";
 
-
-
 	@Autowired
 	private MockMvc mockMvc;
 
