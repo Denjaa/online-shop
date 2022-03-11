@@ -8,7 +8,7 @@ plugins {
 	id 'com.palantir.docker-run' version '0.31.0'
 }
 
-version = "1.0"
+version = "latest"
 sourceCompatibility = '8'
 
 repositories {
