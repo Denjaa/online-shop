@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableConfigServer
 public class ShopApplication {
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShopApplication.class, args);
