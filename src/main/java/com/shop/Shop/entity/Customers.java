@@ -85,4 +85,16 @@ public class Customers {
     public void setProductId(int productId) {
         this.productId = productId;
     }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Products products;
+
+    public Products getProducts() {
+        return products;
+    }
+
+    public void setProducts(Products products) {
+        this.products = products;
+    }
 }

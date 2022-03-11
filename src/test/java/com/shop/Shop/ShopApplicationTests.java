@@ -1,18 +1,25 @@
 package com.shop.Shop;
 
+import com.shop.Shop.service.MyUserDetailsService;
+import com.shop.Shop.util.JwtUtil;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,12 +28,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration
 @AutoConfigureMockMvc
 @SpringBootTest
-class ShopApplicationTests {
-
-	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0Mzg2MzUxNCwiaWF0IjoxNjQzODI3NTE0fQ.-pvMB800hJY1EdNt3soHE9F6eyWW-aDDppwfnU3pS5Y";
+class ShopApplicationTests<token> {
 
 	@Autowired
 	private MockMvc mockMvc;
+
+	private String generated_tokenizer = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY0NzA0ODI5MCwiaWF0IjoxNjQ3MDEyMjkwfQ.0xgD4KKH0dKj8qDy01UotX_gBDXRoRJ37kMnhrR8oUY";
 
 	@Test
 	public void allCustomers() throws Exception {
@@ -106,12 +113,12 @@ class ShopApplicationTests {
 				.andReturn();
 
 		String stringResult = result.getResponse().getContentAsString();
-		assertEquals("{\"id\":1,\"name\":\"Denis\",\"surname\":\"Morozov\",\"address\":\"Dunville Green, Navan\",\"email\":\"denis@student.ait.ie\",\"productId\":1}", stringResult);
+		assertEquals("{\"id\":1,\"name\":\"Denis\",\"surname\":\"Morozov\",\"address\":\"Dunville Green, Navan\",\"email\":\"denis@student.ait.ie\",\"productId\":1,\"products\":{\"id\":1,\"name\":\"Magic House \",\"brand\":\"L.O.L\",\"availability\":\"yes\"}}", stringResult);
 	}
 
 	@Test
 	public void addOrUpdateCustomerValues() throws Exception {
-		String customer = "{\"id\":3,\"name\":\"Tester\",\"surname\":\"Tester Surname\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"product_id\":100}";
+		String customer = "{\"id\":3,\"name\":\"Tester\",\"surname\":\"Tester Surname\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"productId\":0,\"products\":null}";
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/customers/addOrUpdate")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(customer)
@@ -120,7 +127,7 @@ class ShopApplicationTests {
 				.andReturn();
 
 		String stringResult = result.getResponse().getContentAsString();
-		assertEquals("{\"id\":3,\"name\":\"Tester\",\"surname\":\"Tester Surname\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"productId\":0}", stringResult);
+		assertEquals("{\"id\":3,\"name\":\"Tester\",\"surname\":\"Tester Surname\",\"address\":\"Testing Sample Address\",\"email\":\"test@test.com\",\"productId\":0,\"products\":null}", stringResult);
 	}
 
 	@Test
